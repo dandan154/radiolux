@@ -41,4 +41,4 @@ done
 
 rm -f website.html
 echo
-echo Done!
+echo "Done."
