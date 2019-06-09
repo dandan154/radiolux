@@ -10,7 +10,6 @@ ENDFLAG=0
 INC=1
 
 #TODO: Change method by which songs and artists are retrieved, make seperation more distinct before appending to file
-#TODO: Not 100% sure if cat -n is POSIX compliant, search for alternative.
 #TODO: Ideal system should check start of both song and artist seperately, if either contains a ?-prefix, remove
 
 
