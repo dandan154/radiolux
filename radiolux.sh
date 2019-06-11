@@ -9,11 +9,6 @@ OUTFILE="output.txt"
 ENDFLAG=0
 SILENTFLAG=0
 
-#TODO: Change method by which songs and artists are retrieved, make seperation more distinct before appending to file
-#TODO: Not 100% sure if cat -n is POSIX compliant, search for alternative.
-#TODO: Ideal system should check start of both song and artist seperately, if either contains a ?-prefix, remove
-
-
 display_help(){
   echo "NAME"
   echo "  radiolux - Uses cURL to retrieve Radio Luxembourg charts from 1980-1991."
@@ -42,7 +37,6 @@ do
 done
 shift $((OPTIND-1))
 
-
 echo "RADIO LUXEMBOURG CHARTS" > "$OUTFILE"
 echo "Downloading Charts:"
 while [ $ENDFLAG -eq 0 ]; do
@@ -62,9 +56,6 @@ while [ $ENDFLAG -eq 0 ]; do
   #Chart songs parsing
   grep -F "$SONG" "website.html" | sed "s/$SONG//g; s/<\/*[[:alnum:]]*>//g; s/[[:space:]]\{2,\}//g; s/\([[:lower:]][[:punct:]]*\)\([[:upper:]]\)/\1\t\2/g; /^?/d; /^-/d" | cat -n >> "$OUTFILE"
   URL=$(grep -F "$NEXT" "website.html" | sed "s/\t<TD ALIGN=\"right\"><A HREF='\(.*\)'><B>Next Chart<\/B>/\1/g; s/\r//g")
-
-  #${URL%$'\r'}
-
 
   if [ "$URL" = "" ]
   then
